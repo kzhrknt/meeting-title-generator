@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会議タイトルジェネレーター</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>会議タイトルジェネレーター</h1>
+        <div class="form-container">
+            <div class="form-group">
+                <label for="meeting-type">会議タイプ</label>
+                <select id="meeting-type">
+                    <option value="Ext">Ext（外部）</option>
+                    <option value="Int">Int（内部）</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="project-name">案件名</label>
+                <input type="text" id="project-name" placeholder="例: プロジェクトX">
+            </div>
+            <div class="form-group">
+                <label for="agenda">アジェンダ</label>
+                <input type="text" id="agenda" placeholder="例: 進捗確認">
+            </div>
+            <div class="form-group">
+                <label for="location">場所</label>
+                <input type="text" id="location" placeholder="例: 会議室A">
+            </div>
+            <button id="generate-btn">タイトル生成</button>
+        </div>
+        <div class="result-container">
+            <h2>生成されたタイトル</h2>
+            <div id="result" class="result">ここに生成されたタイトルが表示されます</div>
+            <button id="copy-btn" class="copy-btn">コピー</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会議タイトルジェネレーター</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .form-container {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .result-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .result {
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            min-height: 30px;
+            word-wrap: break-word;
+        }
+
+        .copy-btn {
+            margin-top: 10px;
+            background-color: #2ecc71;
+        }
+
+        .copy-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>会議タイトルジェネレーター</h1>
+        <div class="form-container">
+            <div class="form-group">
+                <label for="meeting-type">会議タイプ</label>
+                <select id="meeting-type">
+                    <option value="Ext">Ext（外部）</option>
+                    <option value="Int">Int（内部）</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="project-name">案件名</label>
+                <input type="text" id="project-name" placeholder="例: プロジェクトX">
+            </div>
+            <div class="form-group">
+                <label for="agenda">アジェンダ</label>
+                <input type="text" id="agenda" placeholder="例: 進捗確認">
+            </div>
+            <div class="form-group">
+                <label for="location">場所</label>
+                <input type="text" id="location" placeholder="例: 会議室A">
+            </div>
+            <button id="generate-btn">タイトル生成</button>
+        </div>
+        <div class="result-container">
+            <h2>生成されたタイトル</h2>
+            <div id="result" class="result">ここに生成されたタイトルが表示されます</div>
+            <button id="copy-btn" class="copy-btn">コピー</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generate-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const resultElement = document.getElementById('result');
+            
+            generateBtn.addEventListener('click', function() {
+                // Get input values
+                const meetingType = document.getElementById('meeting-type').value;
+                const projectName = document.getElementById('project-name').value;
+                const agenda = document.getElementById('agenda').value;
+                const location = document.getElementById('location').value;
+                
+                // Validate inputs
+                if (!projectName || !agenda || !location) {
+                    alert('すべての項目を入力してください');
+                    return;
+                }
+                
+                // Generate title directly in JavaScript
+                const title = `${meetingType}打ち合わせ：${projectName}「${agenda}」＠${location}`;
+                resultElement.textContent = title;
+            });
+            
+            copyBtn.addEventListener('click', function() {
+                const textToCopy = resultElement.textContent;
+                
+                if (textToCopy === 'ここに生成されたタイトルが表示されます') {
+                    alert('コピーするタイトルがありません');
+                    return;
+                }
+                
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        alert('クリップボードにコピーしました');
+                    })
+                    .catch(err => {
+                        console.error('コピーに失敗しました:', err);
+                        alert('コピーに失敗しました');
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
