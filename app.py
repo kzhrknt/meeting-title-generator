@@ -15,8 +15,8 @@ def generate_title():
     agenda = data.get('agenda')
     location = data.get('location')
     
-    # Generate the title
-    title = f"{meeting_type}打ち合わせ：{project_name}「{agenda}」＠{location}"
+    # Generate the title with the new format
+    title = f"[{location}]{meeting_type}.{project_name}_{agenda}"
     
     return jsonify({'title': title})
 

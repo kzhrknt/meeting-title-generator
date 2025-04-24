@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const location = document.getElementById('location').value;
         
         // Validate inputs
-        if (!projectName || !agenda || !location) {
+        if (!projectName || !agenda) {
             alert('すべての項目を入力してください');
             return;
         }
